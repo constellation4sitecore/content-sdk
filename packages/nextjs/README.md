@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-npm install @constellation4sitecore/nextjs --save
+npm install @constellation4sitecore-content-sdk/nextjs --save
 ```
 
 ## Setup Serialization
@@ -13,7 +13,7 @@ In your project add in `sitecore.json`
 ```json
   "modules": [
     ....
-    "npm:@constellation4sitecore/nextjs"
+    "npm:@constellation4sitecore-content-sdk/nextjs"
   ],
 ```
 
