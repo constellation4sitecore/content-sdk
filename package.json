@@ -30,6 +30,7 @@
     "prettier": "^2.8.0",
     "typedoc": "^0.28.4",
     "typedoc-plugin-markdown": "^4.6.3",
+    "ts-node": "^10.9.1",
     "typescript": "~5.8.3"
   }
 }
