@@ -1,0 +1,15 @@
+{
+  "name": "@constellation4sitecore-content-sdk/url-friendly-page-names",
+  "version": "0.1.0-beta.2",
+  "description": "A collection of XM Cloud compatible libraries for SXA Sitecore Development.",
+  "author": "Richard J. Cabral, Roberto Armas, Sebastian Aliaga",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/constellation4sitecore/content-sdk/issues"
+  },
+  "files": [
+    "serialization",
+    "sitecore.json"
+  ],
+  "gitHead": "4724f2214e80450076a12e36844e89d6b81229c4"
+}
