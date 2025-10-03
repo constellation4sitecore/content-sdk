@@ -15,8 +15,7 @@
   },
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.json && tsc -p tsconfig-esm.json",
-    "clean": "del-cli dist types",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "del-cli dist types"
   },
   "peerDependencies": {
     "@sitecore-content-sdk/nextjs": "^1.1.0",
