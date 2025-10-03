@@ -1,0 +1,46 @@
+{
+  "name": "@constellation4sitecore-content-sdk/security",
+  "version": "0.1.0-beta.1",
+  "description": "A collection of XM Cloud compatible libraries for SXA Sitecore Development.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "author": "Richard J. Cabral, Roberto Armas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/constellation4sitecore/content-sdk/issues"
+  },
+  "engines": {
+    "node": ">=12",
+    "npm": ">=6"
+  },
+  "scripts": {
+    "build": "npm run clean && tsc -p tsconfig.json && tsc -p tsconfig-esm.json",
+    "clean": "del-cli dist types",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "next": "^15.3.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "@sitecore-content-sdk/nextjs": "^1.1.0"
+  },
+  "dependencies": {
+    "@constellation4sitecore-content-sdk/nextjs": "0.1.0-beta.1",
+    "graphql-tag": "^2.12.6",
+    "memory-cache": "^0.2.0"
+  },
+  "devDependencies": {
+    "@types/memory-cache": "^0.2.5",
+    "@sitecore-content-sdk/nextjs": "^1.1.0"
+  },
+  "types": "types/index.d.ts",
+  "files": [
+    "dist",
+    "types",
+    "serialization",
+    "sitecore.json",
+    "/*.js",
+    "/*.d.ts"
+  ],
+  "gitHead": "4724f2214e80450076a12e36844e89d6b81229c4"
+}

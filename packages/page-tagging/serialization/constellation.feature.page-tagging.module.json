@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "Constellation.Feature.PageTagging",
+  "items": {
+    "includes": [
+      {
+        "name": "templates/Feature/Constellation/PageTagging",
+        "path": "/sitecore/templates/Feature/Constellation/Page Tagging"
+      },
+      {
+        "name": "settings/Feature/Constellation/PageTagging",
+        "path": "/sitecore/system/Settings/Feature/Constellation/Page Tagging"
+      },
+      {
+        "name": "settingsModuleItems/Feature/Constellation/PageTagging",
+        "path": "/sitecore/system/Modules/Constellation/Page Tagging"
+      },
+      {
+        "name": "medialibrary",
+        "path": "/sitecore/media library/Images/Social Thumbnail",
+        "scope": "singleItem",
+        "allowedPushOperations": "createOnly"
+      },
+      {
+        "name": "layout/renderings/Feature/Constellation/PageTagging",
+        "path": "/sitecore/layout/Renderings/Feature/Constellation/Page Tagging"
+      }
+    ]
+  },
+  "references": [
+    "Constellation"
+  ]
+}
