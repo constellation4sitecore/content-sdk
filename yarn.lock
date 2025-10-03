@@ -894,7 +894,7 @@
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.27.8.tgz#6667fac16c436b5434a387a34dedb013198f6e6e"
   integrity sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==
 
-"@sitecore-content-sdk/core@1.1.0":
+"@sitecore-content-sdk/core@1.1.0", "@sitecore-content-sdk/core@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@sitecore-content-sdk/core/-/core-1.1.0.tgz#0e17b1804992d709f1ad9381a48b82f60fb99f10"
   integrity sha512-ERNA8Ei5hBuwzZ8PMYP3PrbSKl5EvUj7gS4GK/+yWU30hyXbo8wkyYMQWCaC3h0jlmyD0OPg9VjFqbPWQvQ0Hg==
