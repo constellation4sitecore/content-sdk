@@ -13,7 +13,8 @@
     "build": "npm run clean && tsc -p tsconfig.json && tsc -p tsconfig-esm.json && npm run copy-dts",
     "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" types",
     "clean": "del-cli dist types",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-docs": "npx typedoc --plugin typedoc-plugin-markdown --outputFileStrategy Members --parametersFormat table --readme none --out ../../ref-docs/nextjs --entryPoints src/index.ts --entryPoints src/middleware/index.ts --entryPoints src/utils/index.ts --entryPoints src/graphql-client-factory/index.ts --entryPoints src/fields-extensions/index.ts --entryPoints src/helpers/index.ts --entryPoints src/utils/index.ts --githubPages false"
   },
   "types": "types/index.d.ts",
   "files": [
