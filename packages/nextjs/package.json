@@ -10,8 +10,7 @@
     "url": "https://github.com/Sitecore/content-sdk/issues"
   },
   "scripts": {
-    "build": "npm run clean && tsc -p tsconfig.json && tsc -p tsconfig-esm.json && npm run copy-dts",
-    "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" types",
+    "build": "npm run clean && tsc -p tsconfig.json && tsc -p tsconfig-esm.json",
     "clean": "del-cli dist types",
     "test": "mocha --require ./test/setup.js \"./src/**/*.test.ts\" \"./src/**/*.test.tsx\" --exit",
     "generate-docs": "npx typedoc --plugin typedoc-plugin-markdown --outputFileStrategy Members --parametersFormat table --readme none --out ../../ref-docs/nextjs --entryPoints src/index.ts --entryPoints src/middleware/index.ts --entryPoints src/utils/index.ts --entryPoints src/graphql-client-factory/index.ts --entryPoints src/fields-extensions/index.ts --entryPoints src/helpers/index.ts --entryPoints src/utils/index.ts --githubPages false"
