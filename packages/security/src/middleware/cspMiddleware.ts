@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { CSPSettingService } from '../services/cspSettings';
-import { CacheOptions, SiteResolver } from '@sitecore-content-sdk/nextjs';
+import { CacheOptions } from '../services/cache-client';
+import { SiteResolver } from '@sitecore-content-sdk/core/site';
 import { MiddlewareBase, MiddlewareBaseConfig } from '@sitecore-content-sdk/nextjs/middleware';
 import { createGraphQLClientFactory } from '@constellation4sitecore-content-sdk/nextjs/graphql';
 

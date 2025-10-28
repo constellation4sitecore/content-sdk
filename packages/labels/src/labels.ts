@@ -1,6 +1,6 @@
 import { gql } from 'graphql-request';
 
-import { debug as debuggers } from '@constellation4sitecore-content-sdk/nextjs';
+import { debug as debuggers } from '@constellation4sitecore-content-sdk/nextjs/debugger';
 import { GraphqlService } from '@constellation4sitecore-content-sdk/nextjs/graphql';
 import { mapToNew } from '@constellation4sitecore-content-sdk/mapper';
 import { LayoutServiceData } from '@sitecore-content-sdk/core/layout';
