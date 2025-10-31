@@ -1,0 +1,21 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "Constellation.Foundation.PageAnalyticsScripts",
+  "items": {
+    "includes": [
+      {
+        "name": "templates/Foundation/Constellation/PageAnalyticsScripts",
+        "path": "/sitecore/templates/Foundation/Constellation/Page Analytics Scripts"
+      },
+      {
+        "name": "templates/Branches/Foundation/Constellation/Page Analytics Scripts",
+        "path": "/sitecore/templates/Branches/Foundation/Constellation/Page Analytics Scripts"
+      },
+      {
+        "name": "settings/Foundation/Constellation/Page Analytics Scripts",
+        "path": "/sitecore/system/Settings/Foundation/Constellation/Page Analytics Scripts"
+      }
+    ]
+  },
+  "references": ["Constellation"]
+}
