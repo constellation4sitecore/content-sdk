@@ -4,7 +4,7 @@ import {
   GraphQLRequestClientFactory,
 } from '@sitecore-content-sdk/core';
 import { debug as debugers } from '@constellation4sitecore-content-sdk/nextjs/debugger';
-import { Field, Item } from '@sitecore-content-sdk/nextjs';
+import { Field, Item } from '@sitecore-content-sdk/core/layout';
 import { mapToNew } from '@constellation4sitecore-content-sdk/mapper';
 import { CacheClient, CacheOptions, MemoryCacheClient } from './cache-client';
 import { unstable_cache as cache, revalidateTag } from 'next/cache';

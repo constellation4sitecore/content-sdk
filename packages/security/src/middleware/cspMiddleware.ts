@@ -1,22 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { GraphQLRequestClientFactory } from '@sitecore-content-sdk/core';
 import { CSPSettingService } from '../services/cspSettings';
-import { CacheOptions, SiteResolver } from '@sitecore-content-sdk/nextjs';
-import {
-  MiddlewareBase,
-  MiddlewareBaseConfig,
-} from '@constellation4sitecore-content-sdk/nextjs/middleware';
+import { CacheOptions } from '../services/cache-client';
+import { SiteResolver } from '@sitecore-content-sdk/core/site';
+import { MiddlewareBase, MiddlewareBaseConfig } from '@sitecore-content-sdk/nextjs/middleware';
+import { createGraphQLClientFactory } from '@constellation4sitecore-content-sdk/nextjs/graphql';
 
 export declare type GraphQLRedirectsServiceConfig = {
   /**
    * Override fetch method. Uses 'GraphQLRequestClient' default otherwise.
    */
   fetch?: typeof fetch;
-  /**
-   * A GraphQL Request Client Factory is a function that accepts configuration and returns an instance of a GraphQLRequestClient.
-   * This factory function is used to create and configure GraphQL clients for making GraphQL API requests.
-   */
-  clientFactory: GraphQLRequestClientFactory;
 };
 
 export type CSPMiddlewareConfig = Omit<GraphQLRedirectsServiceConfig, 'fetch'> &
@@ -25,38 +18,31 @@ export type CSPMiddlewareConfig = Omit<GraphQLRedirectsServiceConfig, 'fetch'> &
 
 export class CSPMiddleware extends MiddlewareBase {
   private cspService: CSPSettingService;
-  private siteResolver: SiteResolver;
   constructor(protected config: CSPMiddlewareConfig) {
     super(config);
-    this.siteResolver = config.siteResolver;
+    this.siteResolver = new SiteResolver(config.sites);
     this.cspService = new CSPSettingService({
       cacheEnabled: config.cacheEnabled,
       cacheTimeout: config.cacheTimeout,
-      clientFactory: config.clientFactory,
+      clientFactory: createGraphQLClientFactory(),
       fetch: fetch,
     });
   }
 
-  /**
-   * Gets the Next.js middleware handler with error handling
-   * @returns route handler
-   */
-  public getHandler(): (req: NextRequest, res?: NextResponse) => Promise<NextResponse> {
-    return async (req, res) => {
-      try {
-        return await this.handler(req, res);
-      } catch (error) {
-        console.log('Redirect middleware failed:');
-        console.log(error);
-        return res || NextResponse.next();
-      }
-    };
-  }
+  handle = async (req: NextRequest, res: NextResponse): Promise<NextResponse> => {
+    try {
+      return await this.handler(req, res);
+    } catch (error) {
+      console.log('Redirect middleware failed:');
+      console.log(error);
+      return res || NextResponse.next();
+    }
+  };
 
   private handler = async (req: NextRequest, res?: NextResponse): Promise<NextResponse> => {
     const response = res || NextResponse.next();
 
-    if (this.config.disabled?.()) return response;
+    if (this.disabled(req, response)) return response;
     // Prerender bypass if cookie is set when prerendering is on preview mode
     // More info: https://nextjs.org/docs/pages/building-your-application/configuring/preview-mode
     if (req.cookies.get('__prerender_bypass')) return response;
