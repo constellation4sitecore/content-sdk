@@ -6,8 +6,7 @@
   "module": "dist/esm/index.js",
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.json && tsc -p tsconfig-esm.json",
-    "clean": "del-cli dist types",
-    "prepublishOnly": "npm run build"
+    "clean": "del-cli dist types"
   },
   "engines": {
     "node": ">=12",
