@@ -5,7 +5,7 @@ type SitecoreContext = {
 };
 
 /**
- * Checks if a field has content.
+ * Checks if a field has content. For App Router use hasFieldContent instead.
  * @param ctx - The Sitecore context.
  * @param field - The field to check. Example: LinkField, ImageField, Field<string>
  * @returns True if the field has content, false otherwise.
@@ -26,4 +26,17 @@ export const hasContent = (
     return (field?.value?.src?.length || 0) > 0;
   }
   return Object.keys(field.value).length > 0;
+};
+
+/**
+ * Checks if a field has content.
+ * @param page - THis is supported for App Router.
+ * @param field - The field to check. Example: LinkField, ImageField, Field<string>
+ * @returns True if the field has content, false otherwise.
+ */
+export const hasFieldContent = (
+  page: Page,
+  field: LinkField | ImageField | Field<string>
+): boolean => {
+  return hasContent({ page: page } as SitecoreContext, field);
 };
