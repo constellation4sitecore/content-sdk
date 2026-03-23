@@ -18,10 +18,10 @@
     "clean": "del-cli dist types"
   },
   "peerDependencies": {
-    "@sitecore-content-sdk/nextjs": "^1.1.0",
-    "next": "^15.3.1",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "@sitecore-content-sdk/nextjs": "^2.0.0",
+    "next": "^16.1.1",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1"
   },
   "dependencies": {
     "@constellation4sitecore-content-sdk/nextjs": "^1.1.1",
@@ -29,7 +29,7 @@
     "memory-cache": "^0.2.0"
   },
   "devDependencies": {
-    "@sitecore-content-sdk/nextjs": "^1.1.0",
+    "@sitecore-content-sdk/nextjs": "^2.0.0",
     "@types/memory-cache": "^0.2.5"
   },
   "types": "types/index.d.ts",

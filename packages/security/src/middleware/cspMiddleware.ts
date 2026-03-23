@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { CSPSettingService } from '../services/cspSettings';
 import { CacheOptions } from '../services/cache-client';
-import { SiteResolver } from '@sitecore-content-sdk/core/site';
-import { MiddlewareBase, MiddlewareBaseConfig } from '@sitecore-content-sdk/nextjs/middleware';
+import { SiteResolver } from '@sitecore-content-sdk/content/site';
+import { ProxyBase, ProxyBaseConfig } from '@sitecore-content-sdk/nextjs/proxy';
 import { createGraphQLClientFactory } from '@constellation4sitecore-content-sdk/nextjs/graphql';
 
 export declare type GraphQLRedirectsServiceConfig = {
@@ -13,10 +13,10 @@ export declare type GraphQLRedirectsServiceConfig = {
 };
 
 export type CSPMiddlewareConfig = Omit<GraphQLRedirectsServiceConfig, 'fetch'> &
-  MiddlewareBaseConfig &
+  ProxyBaseConfig &
   CacheOptions;
 
-export class CSPMiddleware extends MiddlewareBase {
+export class CSPMiddleware extends ProxyBase {
   private cspService: CSPSettingService;
   constructor(protected config: CSPMiddlewareConfig) {
     super(config);

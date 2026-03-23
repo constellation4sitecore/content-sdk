@@ -1,4 +1,4 @@
-import { ComponentRendering } from '@sitecore-content-sdk/core/layout';
+import { ComponentRendering } from '@sitecore-content-sdk/content/layout';
 
 export function filterPlaceholders(placeholderList: ComponentRendering[]): ComponentRendering[] {
   let newList = [];

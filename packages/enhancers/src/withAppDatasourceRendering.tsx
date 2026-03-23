@@ -1,4 +1,4 @@
-import { ComponentRendering } from '@sitecore-content-sdk/core/layout';
+import { ComponentRendering } from '@sitecore-content-sdk/content/layout';
 import { Page } from '@sitecore-content-sdk/nextjs';
 import React, { ComponentType, ReactElement } from 'react';
 

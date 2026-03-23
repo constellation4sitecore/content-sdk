@@ -1,4 +1,4 @@
-import { ComponentRendering } from '@sitecore-content-sdk/core/layout';
+import { ComponentRendering } from '@sitecore-content-sdk/content/layout';
 import { useContext } from 'react';
 import { filterPlaceholders } from '../helpers';
 import { ComponentPropsReactContext } from '@sitecore-content-sdk/nextjs';
