@@ -1,20 +1,22 @@
-'use client';
 import { ComponentRendering } from '@sitecore-content-sdk/core/layout';
-import { useSitecore } from '@sitecore-content-sdk/nextjs';
+import { Page } from '@sitecore-content-sdk/nextjs';
 import React, { ComponentType, ReactElement } from 'react';
 
-export interface WithDatasourceRenderingProps {
+export interface WithAppDatasourceRenderingProps {
   rendering: ComponentRendering;
   fields?: unknown;
   dataFields?: unknown;
+  page: Page;
 }
 
-export function withDatasourceRendering() {
-  return function withDatasourceRenderingHoc<ComponentProps extends WithDatasourceRenderingProps>(
+export function withAppDatasourceRendering() {
+  return function withDatasourceRenderingHoc<
+    ComponentProps extends WithAppDatasourceRenderingProps
+  >(
     componentOrMap: ComponentType<ComponentProps> | { [key: string]: ComponentType<ComponentProps> }
   ) {
     return function WithDatasourceRendering(props: ComponentProps): ReactElement {
-      const { page } = useSitecore();
+      const { page } = props;
       const siteName: string = page.layout.sitecore.context.site?.name ?? 'default';
 
       let InjectedComponent: ComponentType<ComponentProps>;

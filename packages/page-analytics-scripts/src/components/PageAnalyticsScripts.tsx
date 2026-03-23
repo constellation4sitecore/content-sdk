@@ -9,35 +9,36 @@ const PageAnalyticsScripts = (props: AnalyticsScriptsProps): JSX.Element => (
       if (script.template.id === TEMPLATES_ID.contentScript) {
         const contentScriptModel = mapToNew<ContentScript>(script);
         return (
-          <>
+          <React.Fragment key={script.id}>
             {contentScriptModel && (
               <>
                 {!contentScriptModel.noScript.value && (
                   <script
-                    key={script.id}
                     id={`_next-${script.id}-init`}
                     type="text/javascript"
                     data-nscript={props.strategy}
-                    dangerouslySetInnerHTML={{ __html: contentScriptModel.contentScript.value }}
+                    dangerouslySetInnerHTML={{
+                      __html: contentScriptModel.contentScript.value,
+                    }}
                   />
                 )}
                 {contentScriptModel.noScript.value && (
                   <noscript
-                    key={script.id}
-                    dangerouslySetInnerHTML={{ __html: contentScriptModel.contentScript.value }}
+                    dangerouslySetInnerHTML={{
+                      __html: contentScriptModel.contentScript.value,
+                    }}
                   />
                 )}
               </>
             )}
-          </>
+          </React.Fragment>
         );
       } else {
         const mappedScriptModel = mapToNew<UrlScript>(script);
         return (
-          <>
+          <React.Fragment key={script.id}>
             {mappedScriptModel && (
               <script
-                key={script.id}
                 id={`_next-${script.id}-init`}
                 data-nscript={props.strategy}
                 src={mappedScriptModel.urlScript.value.href}
@@ -45,7 +46,7 @@ const PageAnalyticsScripts = (props: AnalyticsScriptsProps): JSX.Element => (
                 defer={mappedScriptModel?.defer?.value ? true : undefined}
               />
             )}
-          </>
+          </React.Fragment>
         );
       }
     })}
