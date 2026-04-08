@@ -12,13 +12,13 @@ export declare type GraphQLRedirectsServiceConfig = {
   fetch?: typeof fetch;
 };
 
-export type CSPMiddlewareConfig = Omit<GraphQLRedirectsServiceConfig, 'fetch'> &
+export type CSPProxyConfig = Omit<GraphQLRedirectsServiceConfig, 'fetch'> &
   ProxyBaseConfig &
   CacheOptions;
 
-export class CSPMiddleware extends ProxyBase {
+export class CSPProxy extends ProxyBase {
   private cspService: CSPSettingService;
-  constructor(protected config: CSPMiddlewareConfig) {
+  constructor(protected config: CSPProxyConfig) {
     super(config);
     this.siteResolver = new SiteResolver(config.sites);
     this.cspService = new CSPSettingService({
@@ -33,7 +33,7 @@ export class CSPMiddleware extends ProxyBase {
     try {
       return await this.handler(req, res);
     } catch (error) {
-      console.log('Redirect middleware failed:');
+      console.log('CSP proxy failed:');
       console.log(error);
       return res || NextResponse.next();
     }
@@ -77,7 +77,7 @@ export class CSPMiddleware extends ProxyBase {
     const contentSecurityPolicyHeaderValue = cspHeader.replace(/\s{2,}/g, ' ').trim();
 
     const requestHeaders = new Headers(req.headers);
-    // Response will be provided if other middleware is run before us (e.g. redirects)
+    // Response will be provided if other proxy is run before us (e.g. redirects)
     requestHeaders.set('x-nonce', nonce);
 
     requestHeaders.set('Content-Security-Policy', contentSecurityPolicyHeaderValue);
