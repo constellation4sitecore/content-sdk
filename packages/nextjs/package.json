@@ -7,7 +7,7 @@
   "author": "Richard J. Cabral, Roberto Armas",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Sitecore/content-sdk/issues"
+    "url": "https://github.com/constellation4sitecore/content-sdk/issues"
   },
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.json && tsc -p tsconfig-esm.json",
