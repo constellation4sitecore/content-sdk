@@ -6,6 +6,7 @@
   "module": "dist/esm/index.js",
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.json && tsc -p tsconfig-esm.json",
+    "generate-docs": "npx typedoc --plugin typedoc-plugin-markdown --outputFileStrategy Members --parametersFormat table --readme none --out ../../ref-docs/content --entryPoints src/index.ts --entryPoints src/config/index.ts --entryPoints src/site/index.ts --entryPoints src/tools/index-node.ts --entryPoints src/tools/generate-virtual-folders.ts --githubPages false",
     "test": "mocha \"./src/**/*.test.ts\"",
     "clean": "del-cli dist types"
   },

@@ -6,7 +6,7 @@
 
 # Interface: ExtendedImageProps
 
-Defined in: [packages/nextjs/src/fields-extensions/Image.tsx:4](https://github.com/constellation4sitecore/content-sdk/blob/68f5636dd87f6bb306e4c2c6ae8cb62f4f86e925/packages/nextjs/src/fields-extensions/Image.tsx#L4)
+Defined in: [packages/nextjs/src/fields-extensions/Image.tsx:4](https://github.com/constellation4sitecore/content-sdk/blob/2e47e23613769e7eb9f79d846ccbfeb76eb17b3e/packages/nextjs/src/fields-extensions/Image.tsx#L4)
 
 ## Extends
 
@@ -56,7 +56,7 @@ Custom element to render in Pages in edit mode if field value is empty
 
 > `optional` **field**: (ImageField \| ImageFieldValue) & FieldMetadata
 
-Defined in: node\_modules/@sitecore-content-sdk/react/types/components/Image.d.ts:31
+Defined in: node\_modules/@sitecore-content-sdk/react/types/components/Image.d.ts:47
 
 Image field data (consistent with other field types)
 
@@ -70,7 +70,7 @@ Image field data (consistent with other field types)
 
 > `optional` **imageParams**: `object`
 
-Defined in: node\_modules/@sitecore-content-sdk/react/types/components/Image.d.ts:35
+Defined in: node\_modules/@sitecore-content-sdk/react/types/components/Image.d.ts:51
 
 Parameters that will be attached to Sitecore media URLs
 
@@ -88,7 +88,7 @@ Parameters that will be attached to Sitecore media URLs
 
 > `optional` **isSvg**: `boolean`
 
-Defined in: [packages/nextjs/src/fields-extensions/Image.tsx:5](https://github.com/constellation4sitecore/content-sdk/blob/68f5636dd87f6bb306e4c2c6ae8cb62f4f86e925/packages/nextjs/src/fields-extensions/Image.tsx#L5)
+Defined in: [packages/nextjs/src/fields-extensions/Image.tsx:5](https://github.com/constellation4sitecore/content-sdk/blob/2e47e23613769e7eb9f79d846ccbfeb76eb17b3e/packages/nextjs/src/fields-extensions/Image.tsx#L5)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: [packages/nextjs/src/fields-extensions/Image.tsx:5](https://github.c
 
 > `optional` **mediaUrlPrefix**: `RegExp`
 
-Defined in: node\_modules/@sitecore-content-sdk/react/types/components/Image.d.ts:46
+Defined in: node\_modules/@sitecore-content-sdk/react/types/components/Image.d.ts:62
 
 Custom regexp that finds media URL prefix that will be replaced by `/-/jssmedia` or `/~/jssmedia`.
 
@@ -118,7 +118,7 @@ Custom regexp that finds media URL prefix that will be replaced by `/-/jssmedia`
 
 > `optional` **srcSet**: `ImageSizeParameters`[]
 
-Defined in: node\_modules/@sitecore-content-sdk/react/types/components/Image.d.ts:38
+Defined in: node\_modules/@sitecore-content-sdk/react/types/components/Image.d.ts:54
 
 #### Inherited from
 
