@@ -15,6 +15,7 @@
     "types",
     "typings",
     "dist",
+    "config.d.ts",
     "debugger.d.ts",
     "debugger.js",
     "graphql.d.ts",
