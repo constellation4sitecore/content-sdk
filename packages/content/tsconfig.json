@@ -1,0 +1,24 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "es2017",
+    "skipLibCheck": true,
+    "useUnknownInCatchVariables": false,
+    "module": "commonjs",
+    "outDir": "dist/cjs",
+    "typeRoots": ["node_modules/@types"],
+    "declarationDir": "./types"
+  },
+  "exclude": [
+    "node_modules",
+    "types",
+    "dist",
+    "config.d.ts",
+    "node-tools.d.ts",
+    "site.d.ts",
+    "src/**/*.test.ts",
+    "src/test-data/**/*",
+    "src/tools/codegen/test-data/**/*",
+    "api"
+  ]
+}

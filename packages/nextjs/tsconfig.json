@@ -21,6 +21,7 @@
     "graphql.js",
     "middleware.d.ts",
     "middleware.js",
+    "proxy.d.ts",
     "src/tests/*",
     "src/test-data/*",
     "**/*.test.ts",
