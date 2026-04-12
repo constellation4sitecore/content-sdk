@@ -83,6 +83,28 @@ New `defineConfig` function (`@constellation4sitecore-content-sdk/nextjs/config`
 
 `generateVirtualFolders` is re-exported from `@constellation4sitecore-content-sdk/nextjs/tools` for convenience.
 
+#### `nextjs`: Route handlers for robots.txt and sitemap.xml
+
+New `@constellation4sitecore-content-sdk/nextjs/route-handler` subpath with:
+
+- **`createRobotsRouteHandler`** &mdash; Factory that returns a Next.js App Router `GET` handler serving `robots.txt` per site, with `unstable_cache` revalidation (default 60s) and per-site resolution by host / virtual folder.
+- **`createSitemapRouteHandler`** &mdash; Factory that returns a Next.js App Router `GET` handler serving `sitemap.xml` (and numbered sitemap segments like `/sitemap-1.xml`) per site, with the same caching and site-resolution behavior.
+
+Both handlers accept a `SitecoreClient`, a `sites` list (`SiteInfoWithVirtualFolder[]`), and an optional `revalidate` value (`number | false`, default `60`).
+
+#### Package `exports` fields
+
+The `nextjs` and `content` packages now declare `exports` fields in `package.json` covering every public subpath. This gives consumers strict, explicit module resolution and enables bundlers/TypeScript to discover types via a single source of truth.
+
+Declared subpaths:
+
+| Package | Subpaths |
+|---|---|
+| `@constellation4sitecore-content-sdk/nextjs` | `.`, `./config`, `./proxy`, `./tools`, `./route-handler`, `./debugger`, `./graphql` |
+| `@constellation4sitecore-content-sdk/content` | `.`, `./config`, `./site`, `./node-tools` |
+
+> Note: because `exports` is exhaustive, any subpath not listed above is no longer importable. If you were relying on an undocumented internal path, switch to one of the declared entries.
+
 ## [1.1.1] - 2025
 
 ### Features
