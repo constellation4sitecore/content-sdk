@@ -1,0 +1,294 @@
+/* eslint-disable no-unused-expressions, @typescript-eslint/no-unused-expressions */
+import chai, { expect } from 'chai';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+import { NextRequest } from 'next/server';
+import proxyquire from 'proxyquire';
+import { SitecoreClient } from '@sitecore-content-sdk/content/client';
+import { SiteInfoWithVirtualFolder } from '@constellation4sitecore-content-sdk/content/site';
+
+chai.use(sinonChai);
+
+describe('createSitemapRouteHandler', () => {
+  const sandbox = sinon.createSandbox();
+  let sitecoreClientStub: sinon.SinonStubbedInstance<SitecoreClient>;
+  let sitemapRouteHandlerModule: any;
+  let unstableCacheStub: sinon.SinonStub;
+  let handler: any;
+  let req: Partial<NextRequest>;
+
+  let OriginalResponse: typeof Response;
+
+  const emptyVirtualFolderContext = { params: Promise.resolve({ virtualFolder: '' }) };
+
+  const sites: SiteInfoWithVirtualFolder[] = [
+    { name: 'test-site', hostName: 'example.com', language: 'en', virtualFolder: '' },
+    { name: 'test-site-two', hostName: '*', language: 'da', virtualFolder: '' },
+  ];
+
+  beforeEach(() => {
+    sitecoreClientStub = sandbox.createStubInstance(SitecoreClient);
+    unstableCacheStub = sandbox.stub().callsFake((fn) => fn);
+
+    sitemapRouteHandlerModule = proxyquire('./sitemap-route-handler', {
+      'next/cache': { unstable_cache: unstableCacheStub },
+    });
+
+    OriginalResponse = (globalThis as any).Response;
+
+    (globalThis as any).Response = sinon.stub().callsFake((body, options) => {
+      return {
+        headers: options?.headers,
+        status: options?.status,
+        body,
+      };
+    });
+
+    req = {
+      headers: new Headers({
+        host: 'example.com',
+        'x-forwarded-proto': 'https',
+      }),
+      nextUrl: {
+        pathname: '/sitemap.xml',
+      } as any,
+    } as NextRequest;
+
+    handler = sitemapRouteHandlerModule.createSitemapRouteHandler({
+      client: sitecoreClientStub as unknown as SitecoreClient,
+      sites,
+    });
+  });
+
+  afterEach(() => {
+    sandbox.restore();
+    sinon.restore();
+    (globalThis as any).Response = OriginalResponse;
+  });
+
+  describe('handler', () => {
+    it('should process sitemap request without id parameter', async () => {
+      const siteName = sites[0].name;
+      const xmlContent = '<sitemapindex>...</sitemapindex>';
+
+      sitecoreClientStub.getSiteMap.resolves(xmlContent);
+
+      const res = await handler.GET(req as NextRequest, emptyVirtualFolderContext);
+
+      expect(sitecoreClientStub.getSiteMap.calledOnce).to.be.true;
+      expect(sitecoreClientStub.getSiteMap.firstCall.args[0]).to.deep.include({
+        reqHost: 'example.com',
+        reqProtocol: 'https',
+        id: '',
+        siteName: siteName,
+      });
+
+      expect(res.headers).to.deep.equal({
+        'Content-Type': 'text/xml;charset=utf-8',
+      });
+      expect(res.body).to.equal(xmlContent);
+    });
+
+    it('should handle sitemap request with specific id parameter', async () => {
+      const sitemapId = '1';
+      req.nextUrl!.pathname = `/sitemap-${sitemapId}.xml`;
+      const siteName = sites[0].name;
+      const xmlContent = '<urlset>...</urlset>';
+
+      sitecoreClientStub.getSiteMap.resolves(xmlContent);
+
+      const res = await handler.GET(req as NextRequest, emptyVirtualFolderContext);
+
+      expect(sitecoreClientStub.getSiteMap.firstCall.args[0]).to.deep.include({
+        reqHost: 'example.com',
+        reqProtocol: 'https',
+        id: sitemapId,
+        siteName: siteName,
+      });
+      expect(res.body).to.equal(xmlContent);
+    });
+
+    it('should default to https protocol when x-forwarded-proto header is missing', async () => {
+      const reqWithoutProto = {
+        ...req,
+        headers: new Headers({
+          host: 'example.com',
+        }),
+      };
+      const siteName = sites[0].name;
+      const xmlContent = '<sitemapindex>...</sitemapindex>';
+
+      sitecoreClientStub.getSiteMap.resolves(xmlContent);
+
+      const res = await handler.GET(reqWithoutProto as NextRequest, emptyVirtualFolderContext);
+
+      expect(sitecoreClientStub.getSiteMap.firstCall.args[0]).to.deep.include({
+        reqHost: 'example.com',
+        reqProtocol: 'https',
+        siteName: siteName,
+      });
+      expect(res.body).to.equal(xmlContent);
+    });
+
+    it('should use x-forwarded-host header when present', async () => {
+      const reqWithForwardedHost = {
+        ...req,
+        headers: new Headers({
+          'x-forwarded-host': 'example.com',
+          host: 'localhost:3000',
+        }),
+      };
+      const siteName = sites[0].name;
+
+      await handler.GET(reqWithForwardedHost as NextRequest, emptyVirtualFolderContext);
+
+      expect(sitecoreClientStub.getSiteMap).to.have.been.calledWithMatch({
+        reqHost: 'example.com',
+        reqProtocol: 'https',
+        siteName: siteName,
+      });
+    });
+
+    describe('virtualFolder route context', () => {
+      const multiFolderSites: SiteInfoWithVirtualFolder[] = [
+        { name: 'blog-site', hostName: 'example.com', language: 'en', virtualFolder: '/blog' },
+        { name: 'store-site', hostName: 'example.com', language: 'en', virtualFolder: '/store' },
+      ];
+
+      let folderHandler: ReturnType<
+        typeof sitemapRouteHandlerModule.createSitemapRouteHandler
+      >;
+
+      beforeEach(() => {
+        folderHandler = sitemapRouteHandlerModule.createSitemapRouteHandler({
+          client: sitecoreClientStub as unknown as SitecoreClient,
+          sites: multiFolderSites,
+        });
+      });
+
+      it('resolves blog-site when virtualFolder param matches that path segment', async () => {
+        const xmlContent = '<urlset>...</urlset>';
+        sitecoreClientStub.getSiteMap.resolves(xmlContent);
+
+        const res = await folderHandler.GET(req as NextRequest, {
+          params: Promise.resolve({ virtualFolder: 'blog' }),
+        });
+
+        expect(sitecoreClientStub.getSiteMap.firstCall.args[0]).to.deep.include({
+          reqHost: 'example.com',
+          reqProtocol: 'https',
+          id: '',
+          siteName: 'blog-site',
+        });
+        expect(res.body).to.equal(xmlContent);
+      });
+
+      it('resolves store-site when virtualFolder param matches that path segment', async () => {
+        const xmlContent = '<urlset>...</urlset>';
+        sitecoreClientStub.getSiteMap.resolves(xmlContent);
+
+        await folderHandler.GET(req as NextRequest, {
+          params: Promise.resolve({ virtualFolder: 'store' }),
+        });
+
+        expect(sitecoreClientStub.getSiteMap.firstCall.args[0]).to.deep.include({
+          reqHost: 'example.com',
+          reqProtocol: 'https',
+          siteName: 'store-site',
+        });
+      });
+
+      it('does not filter sites when virtualFolder param is empty; host resolution uses full list', async () => {
+        const xmlContent = '<sitemapindex>...</sitemapindex>';
+        sitecoreClientStub.getSiteMap.resolves(xmlContent);
+
+        await folderHandler.GET(req as NextRequest, emptyVirtualFolderContext);
+
+        expect(sitecoreClientStub.getSiteMap.firstCall.args[0].siteName).to.equal('blog-site');
+      });
+
+      it('returns 500 when virtualFolder param matches no site virtualFolder', async () => {
+        sitecoreClientStub.getSiteMap.resolves('<xml/>');
+
+        const res = await folderHandler.GET(req as NextRequest, {
+          params: Promise.resolve({ virtualFolder: 'no-such-folder' }),
+        });
+
+        expect(sitecoreClientStub.getSiteMap.called).to.be.false;
+        expect(res.status).to.equal(500);
+        expect(res.body).to.equal('Internal Server Error');
+      });
+    });
+
+    it('should use empty string when both x-forwarded-host and host headers are missing', async () => {
+      const reqWithoutHeaders = {
+        ...req,
+        headers: new Headers({
+          'x-forwarded-proto': 'https',
+        }),
+        nextUrl: {
+          pathname: '/sitemap.xml',
+        } as any,
+      };
+      const xmlContent = '<sitemapindex>...</sitemapindex>';
+
+      sitecoreClientStub.getSiteMap.resolves(xmlContent);
+
+      const res = await handler.GET(reqWithoutHeaders as NextRequest, emptyVirtualFolderContext);
+
+      expect(sitecoreClientStub.getSiteMap.firstCall.args[0]).to.deep.include({
+        reqHost: '',
+        reqProtocol: 'https',
+      });
+      expect(res.body).to.equal(xmlContent);
+    });
+
+    it('should cache the response for default revalidate time', async () => {
+      const xmlContent = '<sitemapindex>...</sitemapindex>';
+
+      sitecoreClientStub.getSiteMap.resolves(xmlContent);
+
+      await handler.GET(req as NextRequest, emptyVirtualFolderContext);
+
+      expect(unstableCacheStub.callCount).to.equal(1);
+      expect(unstableCacheStub.args[0][2].revalidate).to.equal(60);
+    });
+
+    it('should cache the response for custom revalidate time', async () => {
+      unstableCacheStub.resetHistory();
+
+      const handler = sitemapRouteHandlerModule.createSitemapRouteHandler({
+        client: sitecoreClientStub,
+        sites,
+        revalidate: 10,
+      });
+
+      await handler.GET(req as NextRequest, emptyVirtualFolderContext);
+
+      expect(unstableCacheStub.callCount).to.equal(1);
+      expect(unstableCacheStub.args[0][2].revalidate).to.equal(10);
+    });
+
+    it('should redirect to 404 when REDIRECT_404 error is thrown', async () => {
+      const error = new Error('REDIRECT_404');
+
+      sitecoreClientStub.getSiteMap.rejects(error);
+
+      const res = await handler.GET(req as NextRequest, emptyVirtualFolderContext);
+
+      expect(res.status).to.equal(404);
+      expect(res.body).to.equal('Not Found');
+    });
+
+    it('should return 500 error when any other error occurs', async () => {
+      const error = new Error('Unexpected error');
+
+      sitecoreClientStub.getSiteMap.rejects(error);
+
+      const res = await handler.GET(req as NextRequest, emptyVirtualFolderContext);
+
+      expect(res.status).to.equal(500);
+      expect(res.body).to.equal('Internal Server Error');
+    });
+  });
+});

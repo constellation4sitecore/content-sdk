@@ -57,5 +57,42 @@
   "peerDependencies": {
     "@sitecore-content-sdk/nextjs": "^2.0.0"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./types/index.d.ts"
+    },
+    "./config": {
+      "import": "./dist/esm/config/index.js",
+      "require": "./dist/cjs/config/index.js",
+      "types": "./types/config/index.d.ts"
+    },
+    "./proxy": {
+      "import": "./dist/esm/proxy/index.js",
+      "require": "./dist/cjs/proxy/index.js",
+      "types": "./types/proxy/index.d.ts"
+    },
+    "./tools": {
+      "import": "./dist/esm/tools/index.js",
+      "require": "./dist/cjs/tools/index.js",
+      "types": "./types/tools/index.d.ts"
+    },
+    "./route-handler": {
+      "import": "./dist/esm/route-handler/index.js",
+      "require": "./dist/cjs/route-handler/index.js",
+      "types": "./types/route-handler/index.d.ts"
+    },
+    "./debugger": {
+      "import": "./dist/esm/debugger/index.js",
+      "require": "./dist/cjs/debugger/index.js",
+      "types": "./types/debugger/index.d.ts"
+    },
+    "./graphql": {
+      "import": "./dist/esm/graphql-client-factory/index.js",
+      "require": "./dist/cjs/graphql-client-factory/index.js",
+      "types": "./types/graphql-client-factory/index.d.ts"
+    }
+  },
   "gitHead": "4724f2214e80450076a12e36844e89d6b81229c4"
 }

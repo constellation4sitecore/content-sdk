@@ -54,6 +54,11 @@
     "/*.d.ts"
   ],
   "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./types/index.d.ts"
+    },
     "./config": {
       "import": "./dist/esm/config/index.js",
       "require": "./dist/cjs/config/index.js",

@@ -12,4 +12,6 @@ export default {
   analytics: debugModule(`${debugNamespace}:analytics`),
   security: debugModule(`${debugNamespace}:security`),
   http: debugModule(`${debugNamespace}:http`),
+  robots: debugModule(`${debugNamespace}:robots`),
+  sitemap: debugModule(`${debugNamespace}:sitemap`),
 };
