@@ -6,7 +6,7 @@
 
 # Class: GraphqlService
 
-Defined in: [packages/nextjs/src/graphql-client-factory/service.ts:6](https://github.com/constellation4sitecore/content-sdk/blob/68f5636dd87f6bb306e4c2c6ae8cb62f4f86e925/packages/nextjs/src/graphql-client-factory/service.ts#L6)
+Defined in: [packages/nextjs/src/graphql-client-factory/service.ts:6](https://github.com/constellation4sitecore/content-sdk/blob/2e47e23613769e7eb9f79d846ccbfeb76eb17b3e/packages/nextjs/src/graphql-client-factory/service.ts#L6)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [packages/nextjs/src/graphql-client-factory/service.ts:6](https://gi
 
 > **new GraphqlService**(`layoutData`): `GraphqlService`
 
-Defined in: [packages/nextjs/src/graphql-client-factory/service.ts:11](https://github.com/constellation4sitecore/content-sdk/blob/68f5636dd87f6bb306e4c2c6ae8cb62f4f86e925/packages/nextjs/src/graphql-client-factory/service.ts#L11)
+Defined in: [packages/nextjs/src/graphql-client-factory/service.ts:11](https://github.com/constellation4sitecore/content-sdk/blob/2e47e23613769e7eb9f79d846ccbfeb76eb17b3e/packages/nextjs/src/graphql-client-factory/service.ts#L11)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [packages/nextjs/src/graphql-client-factory/service.ts:11](https://g
 
 > `protected` **language**: `string`
 
-Defined in: [packages/nextjs/src/graphql-client-factory/service.ts:7](https://github.com/constellation4sitecore/content-sdk/blob/68f5636dd87f6bb306e4c2c6ae8cb62f4f86e925/packages/nextjs/src/graphql-client-factory/service.ts#L7)
+Defined in: [packages/nextjs/src/graphql-client-factory/service.ts:7](https://github.com/constellation4sitecore/content-sdk/blob/2e47e23613769e7eb9f79d846ccbfeb76eb17b3e/packages/nextjs/src/graphql-client-factory/service.ts#L7)
 
 ## Methods
 
@@ -40,7 +40,7 @@ Defined in: [packages/nextjs/src/graphql-client-factory/service.ts:7](https://gi
 
 > `protected` **getClient**(): `GraphQLRequestClient`
 
-Defined in: [packages/nextjs/src/graphql-client-factory/service.ts:16](https://github.com/constellation4sitecore/content-sdk/blob/68f5636dd87f6bb306e4c2c6ae8cb62f4f86e925/packages/nextjs/src/graphql-client-factory/service.ts#L16)
+Defined in: [packages/nextjs/src/graphql-client-factory/service.ts:16](https://github.com/constellation4sitecore/content-sdk/blob/2e47e23613769e7eb9f79d846ccbfeb76eb17b3e/packages/nextjs/src/graphql-client-factory/service.ts#L16)
 
 #### Returns
 

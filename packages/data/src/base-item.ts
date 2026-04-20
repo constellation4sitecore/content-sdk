@@ -1,4 +1,4 @@
-import { Item } from '@sitecore-content-sdk/core/layout';
+import { Item } from '@sitecore-content-sdk/content/layout';
 
 /**
  * Represents a base item in Sitecore.

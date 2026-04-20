@@ -1,5 +1,5 @@
 import { GraphqlService } from '@constellation4sitecore-content-sdk/nextjs/graphql';
-import { LayoutServiceData } from '@sitecore-content-sdk/core/layout';
+import { LayoutServiceData } from '@sitecore-content-sdk/content/layout';
 import { gql } from 'graphql-request';
 import { AnalyticScriptItem, AnalyticScripts } from '../models';
 

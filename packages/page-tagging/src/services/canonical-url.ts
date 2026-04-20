@@ -1,6 +1,6 @@
 import { GetStaticPropsContext } from 'next';
 import { removeLanguageFromUrl, removeTrailingSlash } from '../helpers/url';
-import { resolveUrl } from '@sitecore-content-sdk/core/utils';
+import { resolveUrl } from '@sitecore-content-sdk/nextjs/utils';
 export class CanonicalUrlService {
   context: GetStaticPropsContext;
 

@@ -16,10 +16,8 @@ export const createGraphQLClientFactory = () => {
   const projectConfig = defineConfig({});
   if (projectConfig.api?.edge?.contextId) {
     clientConfig = {
-      endpoint: getEdgeProxyContentUrl(
-        projectConfig.api?.edge?.contextId,
-        projectConfig.api?.edge?.edgeUrl
-      ),
+      endpoint: getEdgeProxyContentUrl(projectConfig.api?.edge?.edgeUrl),
+      contextId: projectConfig.api?.edge?.contextId,
     };
   } else if (projectConfig.api?.local?.apiHost && projectConfig.api?.local.apiKey) {
     clientConfig = {

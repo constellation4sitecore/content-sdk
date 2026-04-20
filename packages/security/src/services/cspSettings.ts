@@ -4,7 +4,7 @@ import {
   GraphQLRequestClientFactory,
 } from '@sitecore-content-sdk/core';
 import { debug as debugers } from '@constellation4sitecore-content-sdk/nextjs/debugger';
-import { Field, Item } from '@sitecore-content-sdk/core/layout';
+import { Field, Item } from '@sitecore-content-sdk/content/layout';
 import { mapToNew } from '@constellation4sitecore-content-sdk/mapper';
 import { CacheClient, CacheOptions, MemoryCacheClient } from './cache-client';
 import { unstable_cache as cache, revalidateTag } from 'next/cache';
@@ -134,7 +134,7 @@ export class CSPSettingService {
   ): Promise<CSPSetting | null> {
     const cacheKey = `csp-${siteName}`;
     if (process.env.CONSTELLATION_NEXT_CACHE_ENABLED === 'true') {
-      if (forceCacheClear) revalidateTag(cacheKey);
+      if (forceCacheClear) revalidateTag(cacheKey, 'max');
       return await cache(
         async (language, siteName) => this.fetchSettings(language, siteName),
         [language, siteName],

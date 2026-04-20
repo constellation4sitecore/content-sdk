@@ -3,7 +3,7 @@ import { gql } from 'graphql-request';
 import { debug as debuggers } from '@constellation4sitecore-content-sdk/nextjs/debugger';
 import { GraphqlService } from '@constellation4sitecore-content-sdk/nextjs/graphql';
 import { mapToNew } from '@constellation4sitecore-content-sdk/mapper';
-import { LayoutServiceData } from '@sitecore-content-sdk/core/layout';
+import { LayoutServiceData } from '@sitecore-content-sdk/content/layout';
 
 // https://stackoverflow.com/questions/56018167/typescript-does-not-copy-d-ts-files-to-build
 // .d.ts workaraound

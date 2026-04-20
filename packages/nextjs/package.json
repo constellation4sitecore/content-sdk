@@ -1,19 +1,19 @@
 {
   "name": "@constellation4sitecore-content-sdk/nextjs",
-  "version": "1.1.1",
+  "version": "2.0.0-beta.6",
   "description": "A collection of XM Cloud compatible libraries for SXA Sitecore Development.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "author": "Richard J. Cabral, Roberto Armas",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Sitecore/content-sdk/issues"
+    "url": "https://github.com/constellation4sitecore/content-sdk/issues"
   },
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.json && tsc -p tsconfig-esm.json",
     "clean": "del-cli dist types",
     "test": "mocha --require ./test/setup.js \"./src/**/*.test.ts\" \"./src/**/*.test.tsx\" --exit",
-    "generate-docs": "npx typedoc --plugin typedoc-plugin-markdown --outputFileStrategy Members --parametersFormat table --readme none --out ../../ref-docs/nextjs --entryPoints src/index.ts --entryPoints src/middleware/index.ts --entryPoints src/utils/index.ts --entryPoints src/graphql-client-factory/index.ts --entryPoints src/fields-extensions/index.ts --entryPoints src/helpers/index.ts --entryPoints src/utils/index.ts --githubPages false"
+    "generate-docs": "npx typedoc --plugin typedoc-plugin-markdown --outputFileStrategy Members --parametersFormat table --readme none --out ../../ref-docs/nextjs --entryPoints src/index.ts --entryPoints src/config/index.ts --entryPoints src/fields-extensions/index.ts --entryPoints src/graphql-client-factory/index.ts --entryPoints src/helpers/index.ts --entryPoints src/proxy/index.ts --entryPoints src/tools/index.ts --entryPoints src/utils/index.ts --githubPages false"
   },
   "types": "types/index.d.ts",
   "files": [
@@ -25,14 +25,16 @@
     "/*.d.ts"
   ],
   "devDependencies": {
-    "@sitecore-content-sdk/nextjs": "^1.1.0",
+    "@sitecore-content-sdk/nextjs": "^2.0.0",
     "@types/chai": "^5.2.2",
     "@types/chai-string": "^1.4.5",
     "@types/debug": "^4.1.5",
     "@types/mocha": "^10.0.10",
-    "@types/node": "~22.9.0",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.3",
+    "@types/node": "^24.10.4",
+    "@types/proxyquire": "^1.3.31",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@types/sinon": "^17.0.4",
     "chai": "^4.4.1",
     "chai-string": "^1.6.0",
     "copyfiles": "^2.4.1",
@@ -41,17 +43,56 @@
     "eslint-plugin-react": "^7.37.5",
     "jsdom": "^21.1.0",
     "mocha": "^11.2.2",
-    "next": "^15.3.1",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "ts-node": "^10.9.1",
-    "typescript": "~5.4.0"
+    "next": "^16.1.1",
+    "proxyquire": "^2.1.3",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "sinon": "^20.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.8.3"
   },
   "dependencies": {
-    "debug": "^4.3.1"
+    "@constellation4sitecore-content-sdk/content": "2.0.0-beta.6"
   },
   "peerDependencies": {
-    "@sitecore-content-sdk/nextjs": "^1.1.0"
+    "@sitecore-content-sdk/nextjs": "^2.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./types/index.d.ts"
+    },
+    "./config": {
+      "import": "./dist/esm/config/index.js",
+      "require": "./dist/cjs/config/index.js",
+      "types": "./types/config/index.d.ts"
+    },
+    "./proxy": {
+      "import": "./dist/esm/proxy/index.js",
+      "require": "./dist/cjs/proxy/index.js",
+      "types": "./types/proxy/index.d.ts"
+    },
+    "./tools": {
+      "import": "./dist/esm/tools/index.js",
+      "require": "./dist/cjs/tools/index.js",
+      "types": "./types/tools/index.d.ts"
+    },
+    "./route-handler": {
+      "import": "./dist/esm/route-handler/index.js",
+      "require": "./dist/cjs/route-handler/index.js",
+      "types": "./types/route-handler/index.d.ts"
+    },
+    "./debugger": {
+      "import": "./dist/esm/debugger/index.js",
+      "require": "./dist/cjs/debugger/index.js",
+      "types": "./types/debugger/index.d.ts"
+    },
+    "./graphql": {
+      "import": "./dist/esm/graphql-client-factory/index.js",
+      "require": "./dist/cjs/graphql-client-factory/index.js",
+      "types": "./types/graphql-client-factory/index.d.ts"
+    }
   },
   "gitHead": "4724f2214e80450076a12e36844e89d6b81229c4"
 }
