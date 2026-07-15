@@ -18,7 +18,7 @@
     "url": "https://github.com/constellation4sitecore/content-sdk/issues"
   },
   "devDependencies": {
-    "@sitecore-content-sdk/nextjs": "^2.0.0",
+    "@sitecore-content-sdk/nextjs": "^2.2.0",
     "@types/node": "^24.10.4",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
@@ -34,7 +34,7 @@
     "typescript": "~5.8.3"
   },
   "peerDependencies": {
-    "@sitecore-content-sdk/nextjs": "^2.0.0",
+    "@sitecore-content-sdk/nextjs": "^2.2.0",
     "next": "^16.1.1",
     "react": "^19.2.1",
     "react-dom": "^19.2.1"

@@ -1,3 +1,4 @@
+'use server';
 import { NextRequest, NextResponse } from 'next/server';
 import { CSPSettingService } from '../services/cspSettings';
 import { CacheOptions } from '../services/cache-client';

@@ -15,7 +15,7 @@ export function withDatasourceRendering() {
   ) {
     return function WithDatasourceRendering(props: ComponentProps): ReactElement {
       const { page } = useSitecore();
-      const siteName: string = page.layout.sitecore.context.site?.name ?? 'default';
+      const siteName: string = page?.layout?.sitecore?.context.site?.name ?? 'default';
 
       let InjectedComponent: ComponentType<ComponentProps>;
 
