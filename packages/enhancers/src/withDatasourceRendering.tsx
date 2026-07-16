@@ -28,7 +28,7 @@ export function withDatasourceRendering() {
       if (!props.rendering.dataSource) {
         return React.createElement(
           InjectedComponent,
-          Object.assign({}, props, { fields: page.layout.sitecore.route?.fields })
+          Object.assign({}, props, { fields: page?.layout?.sitecore?.route?.fields ?? {} })
         );
       }
 
