@@ -20,7 +20,7 @@
     "url": "https://github.com/constellation4sitecore/content-sdk/issues"
   },
   "devDependencies": {
-    "@sitecore-content-sdk/core": "^2.0.0",
+    "@sitecore-content-sdk/core": "^2.1.1",
     "@types/chai": "^5.2.2",
     "@types/chai-spies": "^1.0.6",
     "@types/node": "^24.10.4",
@@ -44,7 +44,7 @@
     "typescript": "~5.8.3"
   },
   "peerDependencies": {
-    "@sitecore-content-sdk/core": "^2.1.0"
+    "@sitecore-content-sdk/core": "^2.1.1"
   },
   "types": "types/index.d.ts",
   "files": [

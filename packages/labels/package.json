@@ -18,7 +18,7 @@
     "url": "https://github.com/constellation4sitecore/content-sdk/issues"
   },
   "devDependencies": {
-    "@sitecore-content-sdk/core": "^2.0.0",
+    "@sitecore-content-sdk/core": "^2.1.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "copyfiles": "^2.4.1",
@@ -33,7 +33,7 @@
     "typescript": "~5.8.3"
   },
   "peerDependencies": {
-    "@sitecore-content-sdk/core": "^2.0.0",
+    "@sitecore-content-sdk/core": "^2.1.1",
     "next": "^16.1.1",
     "react": "^19.2.1",
     "react-dom": "^19.2.1"

@@ -21,7 +21,9 @@ export class CSPProxy extends ProxyBase {
   private cspService: CSPSettingService;
   constructor(protected config: CSPProxyConfig) {
     super(config);
-    this.siteResolver = new SiteResolver(config.sites);
+    // `ProxyBase` resolves `SiteResolver` from its own nested `@sitecore-content-sdk/content`
+    // copy, which is nominally distinct from this package's copy (protected `getHostMap`).
+    this.siteResolver = new SiteResolver(config.sites) as unknown as typeof this.siteResolver;
     this.cspService = new CSPSettingService({
       cacheEnabled: config.cacheEnabled,
       cacheTimeout: config.cacheTimeout,

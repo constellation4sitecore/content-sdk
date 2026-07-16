@@ -1,11 +1,12 @@
 import {
   SiteInfoService as SiteInfoServiceBase,
-  SiteInfoServiceConfig,
+  SiteInfoServiceConfig as SiteInfoServiceConfigBase,
 } from '@sitecore-content-sdk/content/site';
 import {
   CacheClient,
   FetchOptions,
   GraphQLClient,
+  GraphQLRequestClientFactory,
   MemoryCacheClient,
 } from '@sitecore-content-sdk/core';
 import { gql } from 'graphql-request';
@@ -34,11 +35,23 @@ type GraphQLSiteInfoResponse = {
   };
 };
 
+/**
+ * Config for {@link SiteInfoService}. Mirrors the upstream config but pins
+ * `clientFactory` to this workspace's `@sitecore-content-sdk/core`, so callers
+ * can pass a factory created via `@sitecore-content-sdk/nextjs` (the upstream
+ * package bundles its own nested `core` copy, whose factory type is otherwise
+ * treated as incompatible).
+ * @public
+ */
+export type SiteInfoServiceConfig = Omit<SiteInfoServiceConfigBase, 'clientFactory'> & {
+  clientFactory: GraphQLRequestClientFactory;
+};
+
 export class SiteInfoService extends SiteInfoServiceBase {
   private siteGraphQLClient: GraphQLClient;
   private siteCache: CacheClient<SiteInfoWithVirtualFolder[]>;
   constructor(private readonly siteConfig: SiteInfoServiceConfig) {
-    super(siteConfig);
+    super(siteConfig as unknown as SiteInfoServiceConfigBase);
     this.siteCache = this.getSiteCacheClient();
     this.siteGraphQLClient = this.getGraphQLClient();
   }
