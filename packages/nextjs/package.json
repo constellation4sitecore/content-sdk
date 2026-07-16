@@ -1,6 +1,6 @@
 {
   "name": "@constellation4sitecore-content-sdk/nextjs",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A collection of XM Cloud compatible libraries for SXA Sitecore Development.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -52,7 +52,7 @@
     "typescript": "~5.8.3"
   },
   "dependencies": {
-    "@constellation4sitecore-content-sdk/content": "^2.1.0"
+    "@constellation4sitecore-content-sdk/content": "^2.1.1"
   },
   "peerDependencies": {
     "@sitecore-content-sdk/nextjs": "^2.0.0"

@@ -1,6 +1,6 @@
 {
   "name": "@constellation4sitecore-content-sdk/security",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A collection of XM Cloud compatible libraries for SXA Sitecore Development.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -25,7 +25,7 @@
     "react-dom": "^19.2.1"
   },
   "dependencies": {
-    "@constellation4sitecore-content-sdk/nextjs": "^2.1.0",
+    "@constellation4sitecore-content-sdk/nextjs": "^2.1.1",
     "graphql-tag": "^2.12.6",
     "memory-cache": "^0.2.0"
   },
